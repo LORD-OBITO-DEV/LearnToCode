@@ -3,7 +3,7 @@ import { exec } from "child_process";
 export async function installCyberPanel(vps) {
   const cmd = `
     docker exec -it ${vps.containerName} bash -c "
-    curl -Lo cyberpanel.sh https://raw.githubusercontent.com/<ton_user>/blackhatvps-scripts/main/cyberpanel-install.sh &&
+    curl -Lo cyberpanel.sh https://raw.githubusercontent.com/LORD-OBITO-DEV/blackhatvps-scripts/main/cyberpanel-install.sh &&
     bash cyberpanel.sh
     "
   `;
