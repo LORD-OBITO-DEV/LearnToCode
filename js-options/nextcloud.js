@@ -3,7 +3,7 @@ import { exec } from "child_process";
 export async function installNextcloud(vps) {
   const cmd = `
     docker exec -it ${vps.containerName} bash -c "
-    curl -Lo nextcloud.sh https://raw.githubusercontent.com/<ton_user>/blackhatvps-scripts/main/nextcloud-install.sh &&
+    curl -Lo nextcloud.sh https://raw.githubusercontent.com/LORD-OBITO-DEV/blackhatvps-scripts/main/nextcloud-install.sh &&
     bash nextcloud.sh
     "
   `;
