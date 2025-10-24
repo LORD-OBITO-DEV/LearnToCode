@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réinitialisation de mot de passe</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; }
+    h1 { color: #333; }
+    p { color: #555; }
+    .code { font-size: 22px; font-weight: bold; color: #e74c3c; }
+    .footer { margin-top: 20px; font-size: 12px; color: #999; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Salut, {{name}} !</h1>
+    <p>Voici ton code pour réinitialiser ton mot de passe :</p>
+    <p class="code">{{code}}</p>
+    <p>Ce code est valide pendant 15 minutes.</p>
+    <div class="footer">
+      LearnToCode • Ne partage jamais ce code avec quelqu'un d'autre
+    </div>
+  </div>
+</body>
+</html>
