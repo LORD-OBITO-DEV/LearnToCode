@@ -1,0 +1,71 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../api/api';
+
+function Register() {
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [referral, setReferral] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await auth.register({ name, email, password, ref: referral });
+      localStorage.setItem('token', res.data.token);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Erreur serveur');
+    }
+  };
+
+  return (
+    <div className="max-w-md mx-auto bg-white p-6 rounded shadow mt-10">
+      <h1 className="text-2xl font-bold mb-4">Inscription</h1>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Nom"
+          className="w-full p-2 border rounded"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          className="w-full p-2 border rounded"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          className="w-full p-2 border rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          placeholder="Code de parrainage (optionnel)"
+          className="w-full p-2 border rounded"
+          value={referral}
+          onChange={(e) => setReferral(e.target.value)}
+        />
+        <button type="submit" className="w-full bg-primary text-white py-2 rounded hover:bg-secondary">
+          S'inscrire
+        </button>
+      </form>
+      <p className="mt-4 text-sm text-gray-600">
+        Déjà inscrit ? <a href="/login" className="text-primary underline">Se connecter</a>
+      </p>
+    </div>
+  );
+}
+
+export default Register;
