@@ -1,0 +1,32 @@
+{
+  "title": "JavaScript pour débutants",
+  "slug": "javascript-debutants",
+  "description": "Apprends JavaScript de zéro jusqu'à créer des applications et bots.",
+  "category": "JS",
+  "levels": [
+    {
+      "number": 1,
+      "pricePoints": 5,
+      "content": "Introduction à JavaScript : variables, types, console.log",
+      "exercises": [
+        {
+          "title": "Exercice 1",
+          "question": "Déclare une variable `name` et affiche-la dans la console.",
+          "correctAnswer": "let name; console.log(name);"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "pricePoints": 10,
+      "content": "Fonctions et conditions",
+      "exercises": [
+        {
+          "title": "Exercice 2",
+          "question": "Crée une fonction qui retourne la somme de deux nombres.",
+          "correctAnswer": "function sum(a,b){return a+b;}"
+        }
+      ]
+    }
+  ]
+}
