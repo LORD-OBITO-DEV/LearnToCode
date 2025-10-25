@@ -28,7 +28,7 @@
     "concurrently": "^8.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "laster",
+    "@vitejs/plugin-react": "lastest",
     "autoprefixer": "^11.10.0",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.3.1",
