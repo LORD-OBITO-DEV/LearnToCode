@@ -35,7 +35,7 @@
     "eslint-plugin-react": "latest",
     "postcss": "latest",
     "prettier": "latest",
-    "tailwindcss": "lates",
+    "tailwindcss": "latest",
     "vite": "latest",
     "nodemon": "latest"
   }
