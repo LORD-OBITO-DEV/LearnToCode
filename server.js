@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 const app = express();
@@ -16,7 +17,7 @@ const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/courses');
 
 // MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Connecté à MongoDB'))
   .catch(err => console.error('❌ Erreur MongoDB:', err));
 
@@ -27,6 +28,13 @@ app.use('/api/courses', courseRoutes);
 // Route de test
 app.get('/api/status', (req, res) => {
   res.json({ status: 'ok', message: 'Serveur LearnToCode opérationnel' });
+});
+
+// Servir le frontend React si le build existe
+const clientBuildPath = path.join(__dirname, 'client/build');
+app.use(express.static(clientBuildPath));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
 });
 
 // Gestion des erreurs globales
