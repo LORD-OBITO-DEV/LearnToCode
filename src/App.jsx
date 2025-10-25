@@ -7,9 +7,11 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import CoursePage from './pages/CoursePage';
 import NotFound from './pages/NotFound';
+import Home from './pages/Home';
 
 import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
+
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -20,6 +22,10 @@ function App() {
         <Navbar />
         <main className="flex-grow container mx-auto px-4 py-6">
           <Routes>
+
+// Dans le Router
+           <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Home />} />
+
             <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
             <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
             <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
