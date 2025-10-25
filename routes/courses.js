@@ -2,52 +2,72 @@ const express = require('express');
 const router = express.Router();
 const Course = require('../models/Course');
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
+const authMiddleware = require('../middleware/auth');
 
-// Middleware d'authentification
-async function auth(req, res, next) {
-  const header = req.headers.authorization;
-  if (!header) return res.status(401).json({ message: 'Pas auth' });
-  const token = header.split(' ')[1];
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.id);
-    next();
-  } catch (e) {
-    return res.status(401).json({ message: 'Token invalide' });
-  }
-}
-
-// --- Lister tous les cours ---
+// GET all courses
 router.get('/', async (req, res) => {
-  const courses = await Course.find();
-  res.json(courses);
+  try {
+    const courses = await Course.find();
+    res.json(courses);
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
 });
 
-// --- Obtenir un cours par slug ---
+// GET single course by slug
 router.get('/:slug', async (req, res) => {
-  const course = await Course.findOne({ slug: req.params.slug });
-  if (!course) return res.status(404).json({ message: 'Cours non trouvé' });
-  res.json(course);
-});
-
-// --- Acheter un niveau d'un cours ---
-router.post('/:slug/buy/:level', auth, async (req, res) => {
   try {
     const course = await Course.findOne({ slug: req.params.slug });
-    if (!course) return res.status(404).json({ message: 'Cours introuvable' });
+    if (!course) return res.status(404).json({ message: 'Cours non trouvé' });
+    res.json(course);
+  } catch (err) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
 
-    const levelNum = parseInt(req.params.level, 10);
-    const level = course.levels.find(l => l.number === levelNum);
-    if (!level) return res.status(400).json({ message: 'Niveau invalide' });
+// POST mark exercise complete and add points
+router.post('/:slug/complete', authMiddleware, async (req, res) => {
+  const { levelNumber, exerciseIndex } = req.body;
+  const userId = req.user.id;
 
-    if (req.user.points < level.pricePoints) return res.status(400).json({ message: 'Points insuffisants' });
+  try {
+    const course = await Course.findOne({ slug: req.params.slug });
+    if (!course) return res.status(404).json({ message: 'Cours non trouvé' });
 
-    req.user.points -= level.pricePoints;
-    if (!req.user.purchasedCourses.includes(course._id)) req.user.purchasedCourses.push(course._id);
-    await req.user.save();
+    const level = course.levels.find(l => l.number === levelNumber);
+    if (!level) return res.status(404).json({ message: 'Niveau non trouvé' });
 
-    res.json({ message: 'Niveau débloqué', points: req.user.points });
+    const exercise = level.exercises[exerciseIndex];
+    if (!exercise) return res.status(404).json({ message: 'Exercice non trouvé' });
+
+    const user = await User.findById(userId);
+
+    // Vérifier si l'exercice est déjà complété
+    const alreadyCompleted = user.completedExercises.some(e =>
+      e.courseSlug === course.slug &&
+      e.levelNumber === levelNumber &&
+      e.exerciseIndex === exerciseIndex
+    );
+
+    if (alreadyCompleted) return res.status(400).json({ message: 'Exercice déjà complété' });
+
+    // Ajouter l'exercice complété
+    user.completedExercises.push({ courseSlug: course.slug, levelNumber, exerciseIndex });
+    
+    // Vérifier si le niveau est complété
+    const exercisesCompletedInLevel = user.completedExercises.filter(e =>
+      e.courseSlug === course.slug && e.levelNumber === levelNumber
+    );
+
+    if (exercisesCompletedInLevel.length === level.exercises.length) {
+      user.completedLevels.push({ courseSlug: course.slug, levelNumber });
+    }
+
+    // Ajouter les points
+    user.points += level.pricePoints;
+    await user.save();
+
+    res.json({ message: 'Exercice complété !', points: user.points });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Erreur serveur' });
