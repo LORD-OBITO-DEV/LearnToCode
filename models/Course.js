@@ -1,31 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Schéma pour les exercices de chaque niveau
 const ExerciseSchema = new Schema({
-  question: String,
-  type: { type: String, enum: ['mcq','code','short'], default: 'code' },
-  options: [String],
-  answer: Schema.Types.Mixed // peut être string, nombre, tableau selon type
+  title: { type: String, required: true },
+  question: { type: String, required: true },
+  correctAnswer: { type: String, required: true }
 });
 
-// Schéma pour chaque niveau d'un cours
 const LevelSchema = new Schema({
-  number: Number, // niveau 1..10
-  pricePoints: Number,
-  title: String,
-  content: String, // markdown ou HTML
+  number: { type: Number, required: true },
+  pricePoints: { type: Number, required: true },
+  content: { type: String, required: true },
   exercises: [ExerciseSchema]
 });
 
-// Schéma principal du cours
 const CourseSchema = new Schema({
-  slug: { type: String, unique: true },
-  title: String,
-  description: String,
-  category: String, // html, css, js-web, js-bots, python
-  levels: [LevelSchema],
-  createdAt: { type: Date, default: Date.now }
+  title: { type: String, required: true },
+  slug: { type: String, unique: true, required: true },
+  description: { type: String, required: true },
+  category: { type: String, required: true },
+  levels: [LevelSchema]
 });
 
 module.exports = mongoose.model('Course', CourseSchema);
