@@ -1,11 +1,7 @@
-import React from 'react';
-
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="bg-gray-200 text-gray-700 p-4 text-center mt-8">
-      © {new Date().getFullYear()} LearnToCode • Apprends JS, Python, HTML, CSS et plus • <a href="/" className="text-primary underline">Notre site</a>
+    <footer className="bg-gray-800 text-white p-4 text-center mt-6">
+      &copy; {new Date().getFullYear()} LearnToCode. Tous droits réservés.
     </footer>
   );
 }
-
-export default Footer;
