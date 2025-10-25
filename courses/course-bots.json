@@ -1,0 +1,68 @@
+{
+  "title": "Création de Bots (JavaScript & Python)",
+  "slug": "creation-bots",
+  "description": "Apprends à créer des bots WhatsApp, Telegram et Discord à partir de zéro.",
+  "category": "Bots",
+  "levels": [
+    {
+      "number": 1,
+      "pricePoints": 10,
+      "content": "Introduction aux bots, API et environnement Node.js / Python.",
+      "exercises": [
+        {
+          "title": "Exercice 1",
+          "question": "Installe Node.js et crée ton premier fichier `bot.js`.",
+          "correctAnswer": "console.log('Bot prêt');"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "pricePoints": 15,
+      "content": "Utiliser les bibliothèques : Baileys (JS) et aiogram (Python).",
+      "exercises": [
+        {
+          "title": "Exercice 2",
+          "question": "Installe Baileys via npm et importe-le dans ton fichier JS.",
+          "correctAnswer": "const { makeWASocket } = require('@whiskeysockets/baileys');"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "pricePoints": 25,
+      "content": "Gérer les événements : réception de messages, réponses automatiques.",
+      "exercises": [
+        {
+          "title": "Exercice 3",
+          "question": "Écris une fonction qui répond 'Salut !' à chaque message reçu.",
+          "correctAnswer": "sock.ev.on('messages.upsert', async m => {await sock.sendMessage(m.key.remoteJid, { text: 'Salut !' });});"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "pricePoints": 40,
+      "content": "Créer des commandes et modules personnalisés.",
+      "exercises": [
+        {
+          "title": "Exercice 4",
+          "question": "Ajoute une commande `.ping` qui répond 'Pong!'.",
+          "correctAnswer": "if(body === '.ping'){await sock.sendMessage(jid, { text: 'Pong!' });}"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "pricePoints": 50,
+      "content": "Hébergement et gestion des sessions (MEGA, Render, VPS).",
+      "exercises": [
+        {
+          "title": "Exercice 5",
+          "question": "Explique comment héberger ton bot sur Render avec une session MEGA.",
+          "correctAnswer": "Uploader session.json sur MEGA, charger avec clé MEGA dans .env et déployer sur Render."
+        }
+      ]
+    }
+  ]
+}
