@@ -2,19 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path');
-
-// Routes
-const authRoutes = require('./routes/auth');
-const courseRoutes = require('./routes/courses');
 
 dotenv.config();
 const app = express();
 
-// Middleware
+// Middleware global
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Routes
+const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/courses');
 
 // MongoDB
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -25,10 +24,15 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 
-// Static files pour frontend (React build)
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// Route de test
+app.get('/api/status', (req, res) => {
+  res.json({ status: 'ok', message: 'Serveur LearnToCode opérationnel' });
+});
+
+// Gestion des erreurs globales
+app.use((err, req, res, next) => {
+  console.error('❌ Erreur serveur:', err);
+  res.status(500).json({ error: 'Erreur interne du serveur' });
 });
 
 // Démarrage serveur
