@@ -1,33 +1,22 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
-function Navbar() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem('token');
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
+export default function Navbar() {
+  const { user, logout } = useContext(AuthContext);
 
   return (
-    <nav className="bg-primary text-white p-4 flex justify-between items-center">
+    <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
       <Link to="/" className="font-bold text-xl">LearnToCode</Link>
-      <div className="space-x-4">
-        <Link to="/">Accueil</Link>
-        {token ? (
+      <div>
+        {user ? (
           <>
-            <Link to="/dashboard">Dashboard</Link>
-            <button onClick={handleLogout} className="bg-red-500 px-3 py-1 rounded">Déconnexion</button>
+            <button onClick={logout} className="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Déconnexion</button>
           </>
         ) : (
-          <>
-            <Link to="/login" className="bg-white text-primary px-3 py-1 rounded">Connexion</Link>
-            <Link to="/register" className="bg-white text-primary px-3 py-1 rounded">Inscription</Link>
-          </>
+          <Link to="/login" className="bg-blue-500 px-3 py-1 rounded hover:bg-blue-600">Connexion</Link>
         )}
       </div>
     </nav>
   );
 }
-
-export default Navbar;
