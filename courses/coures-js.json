@@ -1,13 +1,13 @@
 {
-  "title": "JavaScript pour débutants",
-  "slug": "javascript-debutants",
-  "description": "Apprends JavaScript de zéro jusqu'à créer des applications et bots.",
+  "title": "JavaScript Complet",
+  "slug": "javascript-complet",
+  "description": "De zéro à avancé, apprends JS pour sites et bots.",
   "category": "JS",
   "levels": [
     {
       "number": 1,
       "pricePoints": 5,
-      "content": "Introduction à JavaScript : variables, types, console.log",
+      "content": "Variables, types, console.log, alert()",
       "exercises": [
         {
           "title": "Exercice 1",
@@ -19,12 +19,48 @@
     {
       "number": 2,
       "pricePoints": 10,
-      "content": "Fonctions et conditions",
+      "content": "Conditions (if/else), opérateurs, logique booléenne",
       "exercises": [
         {
           "title": "Exercice 2",
+          "question": "Écris une condition qui affiche 'OK' si `x` est supérieur à 10.",
+          "correctAnswer": "if(x>10){console.log('OK');}"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "pricePoints": 15,
+      "content": "Fonctions, paramètres, retour de valeurs",
+      "exercises": [
+        {
+          "title": "Exercice 3",
           "question": "Crée une fonction qui retourne la somme de deux nombres.",
           "correctAnswer": "function sum(a,b){return a+b;}"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "pricePoints": 20,
+      "content": "Tableaux et boucles (for, while, forEach)",
+      "exercises": [
+        {
+          "title": "Exercice 4",
+          "question": "Itère sur le tableau [1,2,3] et affiche chaque élément.",
+          "correctAnswer": "let arr=[1,2,3];arr.forEach(e=>console.log(e));"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "pricePoints": 25,
+      "content": "Objets et manipulation des propriétés",
+      "exercises": [
+        {
+          "title": "Exercice 5",
+          "question": "Crée un objet `user` avec `name` et `age`, puis affiche `name`.",
+          "correctAnswer": "let user={name:'John',age:30};console.log(user.name);"
         }
       ]
     }
