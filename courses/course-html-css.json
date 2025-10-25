@@ -1,0 +1,68 @@
+{
+  "title": "Création de sites web (HTML & CSS)",
+  "slug": "html-css-complet",
+  "description": "Apprends à créer des sites modernes, responsives et esthétiques.",
+  "category": "Web",
+  "levels": [
+    {
+      "number": 1,
+      "pricePoints": 5,
+      "content": "Introduction à HTML : balises de base, structure de page, titres et paragraphes.",
+      "exercises": [
+        {
+          "title": "Exercice 1",
+          "question": "Crée une page HTML simple avec un titre et un paragraphe.",
+          "correctAnswer": "<!DOCTYPE html><html><head><title>Titre</title></head><body><h1>Titre</h1><p>Paragraphe</p></body></html>"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "pricePoints": 10,
+      "content": "Liens, images, listes et tables en HTML.",
+      "exercises": [
+        {
+          "title": "Exercice 2",
+          "question": "Ajoute une image et un lien dans ta page HTML.",
+          "correctAnswer": "<img src='image.jpg'><a href='https://example.com'>Lien</a>"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "pricePoints": 15,
+      "content": "Introduction au CSS : sélecteurs, couleurs, marges et polices.",
+      "exercises": [
+        {
+          "title": "Exercice 3",
+          "question": "Change la couleur du texte d’un paragraphe en bleu via CSS.",
+          "correctAnswer": "p{color:blue;}"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "pricePoints": 20,
+      "content": "Mise en page : Flexbox et Grid pour structurer ton site.",
+      "exercises": [
+        {
+          "title": "Exercice 4",
+          "question": "Utilise Flexbox pour centrer un élément horizontalement et verticalement.",
+          "correctAnswer": "div{display:flex;justify-content:center;align-items:center;}"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "pricePoints": 25,
+      "content": "Responsive Design et media queries.",
+      "exercises": [
+        {
+          "title": "Exercice 5",
+          "question": "Écris une media query qui change la couleur de fond en rouge pour les écrans de moins de 600px.",
+          "correctAnswer": "@media(max-width:600px){body{background:red;}}"
+        }
+      ]
+    }
+  ]
+}
