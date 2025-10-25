@@ -1,22 +1,13 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-function CourseCard({ course }) {
+export default function CourseCard({ course }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex flex-col justify-between">
-      <div>
-        <h2 className="text-xl font-bold mb-2">{course.title}</h2>
-        <p className="text-gray-600 mb-2">{course.description}</p>
-        <p className="text-sm text-gray-500">Catégorie : {course.category}</p>
-      </div>
-      <Link 
-        to={`/course/${course.slug}`} 
-        className="mt-4 bg-primary text-white px-4 py-2 rounded hover:bg-secondary text-center"
-      >
+    <div className="border rounded shadow p-4 hover:shadow-lg transition">
+      <h2 className="text-xl font-bold mb-2">{course.title}</h2>
+      <p className="text-gray-600 mb-4">{course.description}</p>
+      <Link to={`/course/${course.slug}`} className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">
         Voir le cours
       </Link>
     </div>
   );
 }
-
-export default CourseCard;
