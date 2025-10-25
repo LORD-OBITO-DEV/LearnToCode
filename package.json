@@ -31,12 +31,12 @@
     "@vitejs/plugin-react": "latest",
     "autoprefixer": "latest",
     "eslint": "^8.48.0",
-    "eslint-config-prettier": "^9.3.1",
-    "eslint-plugin-react": "^7.32.2",
-    "postcss": "^8.4.35",
-    "prettier": "^3.6.3",
-    "tailwindcss": "^3.4.3",
-    "vite": "^5.3.0",
-    "nodemon": "^3.1.0"
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-react": "latest",
+    "postcss": "latest",
+    "prettier": "latest",
+    "tailwindcss": "lates",
+    "vite": "latest",
+    "nodemon": "latest"
   }
 }
